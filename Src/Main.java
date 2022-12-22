@@ -14,61 +14,65 @@ public class Main {
             throw new InputMismatchException("incorrect equation input! example: 6 * 6");
         }
         int res = 0;
-        if(Romani.isRoma(symbols[0]) && Romani.isRoma(symbols[2])){
-            if(symbols[0].equals("0") || symbols[2].equals("0")){
-                throw new InputMismatchException("you can't use zero");
+        if(symbols[1].equals("+") || symbols[1].equals("-") || symbols[1].equals("*") || symbols[1].equals("/")) {
+            if (Romani.isRoma(symbols[0]) && Romani.isRoma(symbols[2])) {
+                if (symbols[0].equals("0") || symbols[2].equals("0")) {
+                    throw new InputMismatchException("you can't use zero");
+                }
+                RomanNum x1 = RomanNum.valueOf(symbols[0]);
+                RomanNum y1 = RomanNum.valueOf(symbols[2]);
+                int x = x1.getRoma();
+                int y = y1.getRoma();
+                if (x < 1 || x > 10 || y < 1 || y > 10) {
+                    throw new InputMismatchException("enter a number from 1 to 10");
+                }
+                String oper = symbols[1];
+                switch (oper) {
+                    case "+":
+                        res = x + y;
+                        break;
+                    case "-":
+                        res = x - y;
+                        break;
+                    case "*":
+                        res = x * y;
+                        break;
+                    case "/":
+                        res = x / y;
+                        break;
+                }
+                if (res <= 0) {
+                    throw new InputMismatchException("you can't get zero or less than zero");
+                }
+                String result = inRoma(res);
+                return result;
+            } else if (!Romani.isRoma(symbols[0]) && !Romani.isRoma(symbols[2])) {
+                int x = Integer.parseInt(symbols[0]);
+                int y = Integer.parseInt(symbols[2]);
+                if (x < 1 || x > 10 || y < 1 || y > 10) {
+                    throw new InputMismatchException("enter a number from 1 to 10");
+                }
+                String oper = symbols[1];
+                switch (oper) {
+                    case "+":
+                        res = x + y;
+                        break;
+                    case "-":
+                        res = x - y;
+                        break;
+                    case "*":
+                        res = x * y;
+                        break;
+                    case "/":
+                        res = x / y;
+                        break;
+                }
+                return Integer.toString(res);
+            } else {
+                throw new InputMismatchException("numbers are in different systems of calculus");
             }
-            RomanNum x1 = RomanNum.valueOf(symbols[0]);
-            RomanNum y1 = RomanNum.valueOf(symbols[2]);
-            int x = x1.getRoma();
-            int y = y1.getRoma();
-            if(x<1 || x>10 || y<1 || y>10){
-                throw new InputMismatchException("enter a number from 1 to 10");
-            }
-            String oper = symbols[1];
-            switch (oper) {
-                case "+":
-                    res = x + y;
-                    break;
-                case "-":
-                    res = x - y;
-                    break;
-                case "*":
-                    res = x * y;
-                    break;
-                case "/":
-                    res = x / y;
-                    break;
-            }
-            if(res <= 0){
-                throw new InputMismatchException("you can't get zero or less than zero");
-            }
-            String result = inRoma(res);
-            return result;
-        } else if(!Romani.isRoma(symbols[0]) && !Romani.isRoma(symbols[2])){
-            int x = Integer.parseInt(symbols[0]);
-            int y = Integer.parseInt(symbols[2]);
-            if(x<1 || x>10 || y<1 || y>10){
-                throw new InputMismatchException("enter a number from 1 to 10");
-            }
-            String oper = symbols[1];
-            switch (oper) {
-                case "+":
-                    res = x + y;
-                    break;
-                case "-":
-                    res = x - y;
-                    break;
-                case "*":
-                    res = x * y;
-                    break;
-                case "/":
-                    res = x / y;
-                    break;
-            }
-            return Integer.toString(res);
         } else {
-            throw new InputMismatchException("numbers are in different systems of calculus");
+            throw new InputMismatchException("invalid operand input");
         }
     }
     public static String inRoma (int res){
