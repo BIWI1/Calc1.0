@@ -15,6 +15,9 @@ public class Main {
         }
         int res = 0;
         if(Romani.isRoma(symbols[0]) && Romani.isRoma(symbols[2])){
+            if(symbols[0].equals("0") || symbols[2].equals("0")){
+                throw new InputMismatchException("you can't use zero");
+            }
             RomanNum x1 = RomanNum.valueOf(symbols[0]);
             RomanNum y1 = RomanNum.valueOf(symbols[2]);
             int x = x1.getRoma();
