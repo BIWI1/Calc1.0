@@ -14,9 +14,6 @@ public class Main {
             throw new InputMismatchException("incorrect equation input! example: 6 * 6");
         }
         int res = 0;
-        if(!symbols[1].equals("+") || !symbols[1].equals("-") || !symbols[1].equals("*") || !symbols[1].equals("/")){
-            throw new InputMismatchException("invalid operand input");
-        }
         if(Romani.isRoma(symbols[0]) && Romani.isRoma(symbols[2])){
             if(symbols[0].equals("0") || symbols[2].equals("0")){
                 throw new InputMismatchException("you can't use zero");
